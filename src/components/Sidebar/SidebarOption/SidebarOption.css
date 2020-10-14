@@ -1,9 +1,15 @@
 .sidebarOption {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 12px;
   padding-left: 2px;
   cursor: pointer;
+}
+
+.sidebarOption__left {
+  display: flex;
+  align-items: center;
 }
 
 .sidebarOption:hover {
@@ -26,4 +32,9 @@
 
 .sidebarOption__hash {
   padding: 10px;
+}
+
+.sidebarOption__channelAction > button > span > .MuiSvgIcon-root {
+  color: white;
+  z-index: 0;
 }

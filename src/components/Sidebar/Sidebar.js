@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import db from '../../firebase';
 import './Sidebar.css';
 import {
   Add,
   Apps,
-  Bookmark,
   BookmarkBorder,
   Create,
   Drafts,
@@ -18,6 +18,17 @@ import {
 import SidebarOption from './SidebarOption/SidebarOption';
 
 function Sidebar() {
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    db.collection('rooms').onSnapshot((snapshot) => {
+      // console.log(snapshot);
+      setChannels(
+        snapshot.docs.map((doc) => ({ id: doc.id, name: doc.data().name }))
+      );
+    });
+  }, []);
+
   return (
     <div className='sidebar'>
       <div className='sidebar__header'>
@@ -40,8 +51,11 @@ function Sidebar() {
       <SidebarOption Icon={ExpandLess} title='Show Less' />
       <hr />
       <SidebarOption Icon={ExpandMore} title='Channels' />
+      {channels.map((channel) => (
+        <SidebarOption title={channel.name} key={channel.id} id={channel.id} />
+      ))}
       <hr />
-      <SidebarOption Icon={Add} title='Add Channel' />
+      <SidebarOption Icon={Add} title='Add Channel' addChannelOption={true} />
 
       {/* Connect to DB and list all Channel */}
     </div>

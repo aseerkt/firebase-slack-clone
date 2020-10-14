@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 
-#firebase
+#firebase config
 /src/firebase/index.js
 
 # testing
